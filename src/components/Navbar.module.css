@@ -278,3 +278,17 @@
   color: var(--accent-color);
   font-weight: 700;
 }
+
+@media (max-width: 480px) {
+  .logo {
+    gap: 8px;
+  }
+  .logoText {
+    font-size: 1.4rem;
+    white-space: nowrap;
+  }
+  .logoImageWrapper {
+    width: 36px;
+    height: 36px;
+  }
+}
