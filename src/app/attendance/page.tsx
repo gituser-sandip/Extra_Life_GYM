@@ -3,15 +3,16 @@
 import Footer from "@/components/Footer";
 import styles from "./page.module.css";
 import { useState } from "react";
+import { Scanner } from "@yudiel/react-qr-scanner";
 
 export default function AttendancePage() {
   const [memberId, setMemberId] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [isScanning, setIsScanning] = useState(false);
 
-  const handleCheckIn = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!memberId.trim()) {
+  const processCheckIn = async (id: string) => {
+    if (!id.trim()) {
       setStatus("error");
       setMessage("Please enter your member ID.");
       return;
@@ -22,7 +23,7 @@ export default function AttendancePage() {
       const res = await fetch("/api/attendance", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ memberId }),
+        body: JSON.stringify({ memberId: id }),
       });
       if (!res.ok) {
         throw new Error("Check-in failed");
@@ -30,6 +31,7 @@ export default function AttendancePage() {
       setStatus("success");
       setMessage("Check-in successful! Have a great workout.");
       setMemberId("");
+      setIsScanning(false);
     } catch {
       setStatus("error");
       setMessage("Unable to process check-in. Please try again.");
@@ -37,30 +39,64 @@ export default function AttendancePage() {
     setTimeout(() => setStatus("idle"), 3000);
   };
 
+  const handleCheckIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await processCheckIn(memberId);
+  };
+
+  const handleScan = (result: any) => {
+    if (result && result.length > 0) {
+      const scannedId = result[0].rawValue;
+      setMemberId(scannedId);
+      processCheckIn(scannedId);
+    }
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.attendanceContainer}>
         <div className={`glass ${styles.card}`}>
           <h2>MEMBER <span>CHECK-IN</span></h2>
-          <p>Enter your ID to log your attendance.</p>
+          <p>Scan your QR code or enter your ID manually.</p>
           
-          <form onSubmit={handleCheckIn} className={styles.form}>
-            <input 
-              type="text" 
-              placeholder="Enter Member ID..." 
-              value={memberId}
-              onChange={(e) => setMemberId(e.target.value)}
-              className={styles.input}
-              disabled={status === "loading" || status === "success"}
-            />
+          <div className={styles.toggleContainer}>
             <button 
-              type="submit" 
-              className={`btn-primary ${styles.btn}`}
-              disabled={status === "loading" || status === "success"}
+              className={!isScanning ? styles.activeToggle : styles.inactiveToggle}
+              onClick={() => setIsScanning(false)}
             >
-              {status === "loading" ? "Checking In..." : "CHECK IN"}
+              Manual Entry
             </button>
-          </form>
+            <button 
+              className={isScanning ? styles.activeToggle : styles.inactiveToggle}
+              onClick={() => setIsScanning(true)}
+            >
+              Scan QR
+            </button>
+          </div>
+
+          {isScanning ? (
+            <div className={styles.scannerWrapper}>
+              <Scanner onScan={handleScan} />
+            </div>
+          ) : (
+            <form onSubmit={handleCheckIn} className={styles.form}>
+              <input 
+                type="text" 
+                placeholder="Enter Member ID..." 
+                value={memberId}
+                onChange={(e) => setMemberId(e.target.value)}
+                className={styles.input}
+                disabled={status === "loading" || status === "success"}
+              />
+              <button 
+                type="submit" 
+                className={`btn-primary ${styles.btn}`}
+                disabled={status === "loading" || status === "success"}
+              >
+                {status === "loading" ? "Checking In..." : "CHECK IN"}
+              </button>
+            </form>
+          )}
 
           {status === "success" && (
             <div className={styles.successMessage}>
