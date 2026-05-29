@@ -23,6 +23,12 @@ body {
   font-family: var(--font-outfit), sans-serif;
   scroll-behavior: smooth;
   line-height: 1.6;
+  scroll-padding-top: 100px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 3px;
 }
 
 a {
