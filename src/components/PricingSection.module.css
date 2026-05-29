@@ -1,0 +1,89 @@
+.pricingSection {
+  background-color: var(--bg-color);
+  position: relative;
+  padding-top: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  align-items: center;
+}
+
+.card {
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.popular {
+  transform: scale(1.05);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 40px rgba(255, 0, 60, 0.15);
+}
+
+.popular:hover {
+  transform: scale(1.05) translateY(-5px);
+}
+
+.badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-color);
+  color: #0B0C10;
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.planName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.priceContainer {
+  margin-bottom: 2rem;
+}
+
+.price {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.period {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.features {
+  list-style: none;
+  margin-bottom: 3rem;
+}
+
+.features li {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+}
+
+.features li:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 900px) {
+  .popular {
+    transform: scale(1);
+  }
+  .popular:hover {
+    transform: scale(1) translateY(-5px);
+  }
+}
