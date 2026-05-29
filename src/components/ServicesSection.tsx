@@ -1,5 +1,7 @@
 import Image from "next/image";
 import styles from "./ServicesSection.module.css";
+import ScrollReveal from "./animations/ScrollReveal";
+import StaggerReveal from "./animations/StaggerReveal";
 
 const services = [
   {
@@ -32,8 +34,10 @@ export default function ServicesSection() {
   return (
     <section className={styles.servicesSection}>
       <div className="container">
-        <h2 className="section-title">OUR <span>SERVICES</span></h2>
-        <div className={styles.grid}>
+        <ScrollReveal>
+          <h2 className="section-title">OUR <span>SERVICES</span></h2>
+        </ScrollReveal>
+        <StaggerReveal className={styles.grid}>
           {services.map((service) => (
             <div key={service.id} className={`glass ${styles.card}`}>
               <div className={styles.imageWrapper}>
@@ -48,7 +52,7 @@ export default function ServicesSection() {
               <p className={styles.description}>{service.description}</p>
             </div>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );

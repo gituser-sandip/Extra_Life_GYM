@@ -24,6 +24,9 @@ export default function Footer() {
             <li><Link href="/trainers">Trainers</Link></li>
             <li><Link href="/pricing">Pricing</Link></li>
             <li><Link href="/attendance">Member Check-In</Link></li>
+            <li><Link href="/login">Member Login</Link></li>
+            <li><Link href="/signup">Member Sign Up</Link></li>
+            <li><Link href="/admin/login">Admin Portal</Link></li>
           </ul>
         </div>
         <div className={styles.contact}>

@@ -1,4 +1,6 @@
 import styles from "./PricingSection.module.css";
+import ScrollReveal from "./animations/ScrollReveal";
+import StaggerReveal from "./animations/StaggerReveal";
 
 const plans = [
   {
@@ -28,8 +30,10 @@ export default function PricingSection() {
   return (
     <section className={styles.pricingSection}>
       <div className="container">
-        <h2 className="section-title">MEMBERSHIP <span>PLANS</span></h2>
-        <div className={styles.grid}>
+        <ScrollReveal>
+          <h2 className="section-title">MEMBERSHIP <span>PLANS</span></h2>
+        </ScrollReveal>
+        <StaggerReveal className={styles.grid}>
           {plans.map((plan, index) => (
             <div key={index} className={`glass ${styles.card} ${plan.isPopular ? styles.popular : ""}`}>
               {plan.isPopular && <div className={styles.badge}>Most Popular</div>}
@@ -48,7 +52,7 @@ export default function PricingSection() {
               </button>
             </div>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );

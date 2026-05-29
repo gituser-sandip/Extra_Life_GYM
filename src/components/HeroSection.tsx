@@ -1,5 +1,7 @@
 import styles from "./HeroSection.module.css";
 import Link from "next/link";
+import ScrollReveal from "./animations/ScrollReveal";
+import StaggerReveal from "./animations/StaggerReveal";
 
 export default function HeroSection() {
   return (
@@ -7,7 +9,7 @@ export default function HeroSection() {
       {/* Overlay for readability */}
       <div className={styles.overlay}></div>
       
-      <div className={`container ${styles.content}`}>
+      <ScrollReveal className={`container ${styles.content}`}>
         <h1 className={styles.headline}>
           ELEVATE YOUR <br />
           <span className={styles.highlight}>FITNESS</span> JOURNEY
@@ -17,12 +19,12 @@ export default function HeroSection() {
           Push past your limits at ExtraLife GYM.
         </p>
         <div className={styles.actions}>
-          <Link href="/pricing" className="btn-primary">Start Free Trial</Link>
+          <Link href="/pricing" className="btn-primary">Join Now</Link>
           <Link href="/classes" className="btn-secondary">View Classes</Link>
         </div>
-      </div>
+      </ScrollReveal>
       
-      <div className={styles.stats}>
+      <StaggerReveal className={styles.stats}>
         <div className={styles.statItem}>
           <h3>50+</h3>
           <p>Weekly Classes</p>
@@ -35,7 +37,7 @@ export default function HeroSection() {
           <h3>15+</h3>
           <p>Expert Trainers</p>
         </div>
-      </div>
+      </StaggerReveal>
     </section>
   );
 }

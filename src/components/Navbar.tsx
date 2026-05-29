@@ -79,8 +79,8 @@ export default function Navbar() {
           <Link href="/attendance" className={styles.attendanceBtn}>
             Member Check-In
           </Link>
-          <Link href="/pricing" className="btn-primary" aria-label="Join ExtraLife GYM">
-            Join Now
+          <Link href="/login" className="btn-primary" aria-label="Login / Sign Up">
+            Login / Sign Up
           </Link>
         </div>
       </div>
@@ -91,7 +91,6 @@ export default function Navbar() {
         className={`${styles.mobileMenu} ${open ? styles.open : ""}`}
         role={open ? "dialog" : undefined}
         aria-modal={open ? true : undefined}
-        aria-hidden={!open}
       >
         <div className={styles.mobileContent}>
           <div className={styles.mobileLinks}>
@@ -109,7 +108,7 @@ export default function Navbar() {
           </div>
           <div className={styles.mobileActions}>
             <Link href="/attendance" className={styles.mobileAttendance}>Member Check-In</Link>
-            <Link href="/pricing" className="btn-primary" style={{ width: "100%" }}>Join Now</Link>
+            <Link href="/login" className="btn-primary" style={{ width: "100%" }}>Login / Sign Up</Link>
           </div>
         </div>
         <div className={styles.mobileBackdrop} onClick={() => setMenuOpen(false)} aria-hidden="true"></div>

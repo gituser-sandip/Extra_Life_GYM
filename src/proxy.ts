@@ -15,15 +15,27 @@ export async function proxy(request: NextRequest) {
 
     const payload = await verifyToken(token)
     if (!payload) {
-      // Invalid or expired token
       return NextResponse.redirect(new URL('/admin/login', request.url))
     }
   }
 
-  // Allow access
+  // Protect /dashboard routes — requires a valid user_session
+  if (pathname.startsWith('/dashboard')) {
+    const token = request.cookies.get('user_session')?.value
+
+    if (!token) {
+      return NextResponse.redirect(new URL('/login', request.url))
+    }
+
+    const payload = await verifyToken(token)
+    if (!payload) {
+      return NextResponse.redirect(new URL('/login', request.url))
+    }
+  }
+
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: '/admin/:path*',
+  matcher: ['/admin/:path*', '/dashboard/:path*'],
 }
