@@ -1,11 +1,11 @@
 .hero {
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 4rem 0 2rem;
+  padding: 8rem 0 2rem;
   background: url('/hero-bg.jpg') no-repeat center center/cover;
   background-size: cover;
 }
@@ -22,7 +22,7 @@
   z-index: 2;
   max-width: 760px;
   margin: 0 auto;
-  padding-top: 4rem;
+  padding-top: 2rem;
 }
 
 .headline {
@@ -94,7 +94,7 @@
 
 @media (max-width: 900px) {
   .hero {
-    padding: 3.5rem 0 2rem;
+    padding: 7rem 0 2rem;
   }
 
   .headline {
@@ -102,25 +102,33 @@
   }
 
   .stats {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin-top: 3rem;
-    padding: 1rem 0;
+    padding: 0;
     border-radius: 18px;
   }
 
   .statItem {
-    border-right: none;
+    flex: 1 1 50%;
+    border-right: 1px solid rgba(255, 0, 60, 0.1);
     border-bottom: 1px solid rgba(255, 0, 60, 0.1);
+    padding: 1.5rem 1rem;
   }
 
+  .statItem:nth-child(2n) {
+    border-right: none;
+  }
+  
   .statItem:last-child {
+    flex: 1 1 100%;
     border-bottom: none;
   }
 }
 
 @media (max-width: 480px) {
   .headline {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
   }
   .subheadline {
     font-size: 1.1rem;
