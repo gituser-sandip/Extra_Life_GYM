@@ -1,0 +1,100 @@
+.adminLayout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.sidebar {
+  width: 250px;
+  background: rgba(255, 255, 255, 0.02);
+  border-right: 1px solid var(--card-border);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 3rem;
+  color: var(--text-color);
+}
+
+.brand span {
+  color: var(--accent-color);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1;
+}
+
+.navLink {
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.navLink:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-color);
+}
+
+.activeLink {
+  background: rgba(255, 0, 60, 0.1);
+  color: var(--accent-color);
+}
+
+.logoutBtn {
+  margin-top: auto;
+  background: transparent;
+  border: 1px solid var(--card-border);
+  color: var(--text-secondary);
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.logoutBtn:hover {
+  background: rgba(255, 0, 60, 0.1);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.mainContent {
+  flex-grow: 1;
+  padding: 2rem 3rem;
+  overflow-y: auto;
+  background: radial-gradient(circle at top right, rgba(255, 0, 60, 0.05), transparent 400px);
+}
+
+@media (max-width: 768px) {
+  .adminLayout {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--card-border);
+    padding: 1rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    margin-bottom: 0;
+  }
+  .nav {
+    flex-direction: row;
+    display: none; /* In a real app we'd have a hamburger menu */
+  }
+}
