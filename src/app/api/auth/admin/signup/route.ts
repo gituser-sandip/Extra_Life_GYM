@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     }
 
     const hashed = await hashPassword(password);
-    admins.push({ email, password: hashed });
+    admins.push({ email, password: hashed, role: "admin" });
 
     await fs.writeFile(ADMINS_FILE, JSON.stringify(admins, null, 2), "utf8");
 

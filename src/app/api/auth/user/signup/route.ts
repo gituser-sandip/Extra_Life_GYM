@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 import { hashPassword } from "@/lib/password";
+import { signToken } from "@/lib/jwt";
+import { cookies } from "next/headers";
 
 const USERS_FILE = path.join(process.cwd(), "users.json");
 
@@ -27,9 +29,18 @@ export async function POST(req: Request) {
     }
 
     const hashed = await hashPassword(password);
-    users.push({ email, password: hashed });
+    users.push({ email, password: hashed, status: "Active", tier: "Basic" });
 
     await fs.writeFile(USERS_FILE, JSON.stringify(users, null, 2), "utf8");
+
+    const token = await signToken({ email });
+    const cookieStore = await cookies();
+    cookieStore.set("user_session", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 60 * 60 * 24,
+      path: "/",
+    });
 
     return NextResponse.json({ ok: true });
   } catch (e) {

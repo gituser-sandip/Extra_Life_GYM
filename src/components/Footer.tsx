@@ -10,7 +10,7 @@ export default function Footer() {
           <div className={styles.brandLogoContainer}>
             <div className={styles.logoImageWrapper}>
               <div className={styles.logoImageInner}>
-                <Image src="/logo.jpg" alt="Extra Life GYM Logo" fill style={{ objectFit: 'cover' }} />
+                <Image src="/logo.jpg" alt="Extra Life GYM Logo" fill style={{ objectFit: 'cover' }} sizes="45px" />
               </div>
             </div>
             <h2>ExtraLife <span>GYM</span></h2>

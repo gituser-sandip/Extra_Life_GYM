@@ -1,0 +1,12 @@
+[
+  {
+    "email": "admin@extralifegym.com",
+    "password": "$2b$10$fREUVLSOkpNcNm3m83heh.vtxu1wI2KWwZGJijfJYJcu8Z05Yfmjm"
+  },
+  {
+    "email": "merian@gmail.com",
+    "password": "$2b$10$b7k02unLih4YzEXug3s3Y.NESzbb3FHRiMGW7vHvOBVOnsJ870XIG",
+    "status": "Active",
+    "tier": "Basic"
+  }
+]

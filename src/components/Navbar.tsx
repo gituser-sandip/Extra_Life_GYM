@@ -4,9 +4,25 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Navbar.module.css";
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Detect authentication status on client side
+  useEffect(() => {
+    const cookies = document.cookie;
+    const loggedIn = /(?:admin_session|user_session)=/.test(cookies);
+    setIsLoggedIn(loggedIn);
+  }, []);
+
+  const handleLogout = async () => {
+    // Attempt to logout both user and admin sessions (ignore errors)
+    await fetch('/api/auth/user/logout', { method: 'POST' }).catch(() => {});
+    await fetch('/api/auth/admin/logout', { method: 'POST' }).catch(() => {});
+    setIsLoggedIn(false);
+    router.push('/login');
+  };
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -43,7 +59,7 @@ export default function Navbar() {
         <Link href="/" className={styles.logo} aria-label="ExtraLife GYM home">
           <div className={styles.logoImageWrapper}>
             <div className={styles.logoImageInner}>
-              <Image src="/logo.jpg" alt="Extra Life GYM Logo" fill style={{ objectFit: 'cover' }} />
+              <Image src="/logo.jpg" alt="Extra Life GYM Logo" fill style={{ objectFit: 'cover' }} sizes="45px" />
             </div>
           </div>
           <div className={styles.logoText}>ExtraLife <span>GYM</span></div>
@@ -75,14 +91,15 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className={styles.actions}>
-          <Link href="/attendance" className={styles.attendanceBtn}>
-            Member Check-In
-          </Link>
-          <Link href="/login" className="btn-primary" aria-label="Login / Sign Up">
-            Login / Sign Up
-          </Link>
-        </div>
+          <div className={styles.actions}>
+            {isLoggedIn ? (
+              <button onClick={handleLogout} className="btn-primary">Logout</button>
+            ) : (
+              <Link href="/login" className="btn-primary" aria-label="Login / Sign Up">
+                Login / Sign Up
+              </Link>
+            )}
+          </div>
       </div>
 
       {/* Mobile menu overlay */}
@@ -108,7 +125,11 @@ export default function Navbar() {
           </div>
           <div className={styles.mobileActions}>
             <Link href="/attendance" className={styles.mobileAttendance}>Member Check-In</Link>
-            <Link href="/login" className="btn-primary" style={{ width: "100%" }}>Login / Sign Up</Link>
+            {isLoggedIn ? (
+              <button onClick={handleLogout} className="btn-primary" style={{ width: "100%" }}>Logout</button>
+            ) : (
+              <Link href="/login" className="btn-primary" style={{ width: "100%" }}>Login / Sign Up</Link>
+            )}
           </div>
         </div>
         <div className={styles.mobileBackdrop} onClick={() => setMenuOpen(false)} aria-hidden="true"></div>
