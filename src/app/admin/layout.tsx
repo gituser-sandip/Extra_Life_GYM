@@ -16,7 +16,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const handleLogout = async () => {
     try {
-      await fetch("/api/auth/logout", { method: "POST" });
+      await fetch("/api/auth/admin/logout", { method: "POST" });
       router.push("/admin/login");
     } catch (e) {
       console.error(e);
@@ -47,6 +47,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className={`${styles.navLink} ${pathname === "/admin/attendance" ? styles.activeLink : ""}`}
           >
             Attendance Logs
+          </Link>
+          <Link
+            href="/admin/users"
+            className={`${styles.navLink} ${pathname === "/admin/users" ? styles.activeLink : ""}`}
+          >
+            Users Management
+          </Link>
+          <Link
+            href="/admin/admins"
+            className={`${styles.navLink} ${pathname === "/admin/admins" ? styles.activeLink : ""}`}
+          >
+            Admins Management
           </Link>
         </nav>
         <button className={styles.logoutBtn} onClick={handleLogout}>

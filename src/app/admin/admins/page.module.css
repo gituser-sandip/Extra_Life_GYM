@@ -1,0 +1,190 @@
+.page { padding: 2rem; }
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem;
+  color: var(--text-secondary);
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(255,0,60,0.2);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.toast {
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+
+.toastOk {
+  background: rgba(0,200,100,0.1);
+  border: 1px solid rgba(0,200,100,0.25);
+  color: #00c864;
+}
+
+.toastErr {
+  background: rgba(255,0,60,0.1);
+  border: 1px solid rgba(255,0,60,0.25);
+  color: var(--accent-color);
+}
+
+.notice {
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  background: rgba(255,200,0,0.08);
+  border: 1px solid rgba(255,200,0,0.2);
+  color: #ffc800;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table thead tr {
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.table th {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.table tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.15s;
+}
+
+.table tbody tr:last-child { border-bottom: none; }
+
+.table tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+.table td {
+  padding: 0.85rem 1rem;
+  vertical-align: middle;
+}
+
+.saving { opacity: 0.5; pointer-events: none; }
+
+.memberCell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.superAvatar {
+  background: rgba(255,200,0,0.15);
+  border-color: rgba(255,200,0,0.4);
+  color: gold;
+}
+
+.email { color: var(--text-secondary); font-size: 0.85rem; }
+
+.roleBadge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid;
+}
+
+.superBadge {
+  color: gold;
+  border-color: rgba(255,200,0,0.4);
+  background: rgba(255,200,0,0.08);
+}
+
+.adminBadge {
+  color: var(--text-secondary);
+  border-color: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+}
+
+.roleActions { display: flex; gap: 0.5rem; }
+
+.promoteBtn {
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  background: rgba(255,200,0,0.12);
+  border: 1px solid rgba(255,200,0,0.3);
+  color: gold;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.promoteBtn:hover { background: rgba(255,200,0,0.2); }
+
+.demoteBtn {
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  background: rgba(255,0,60,0.1);
+  border: 1px solid rgba(255,0,60,0.25);
+  color: var(--accent-color);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.demoteBtn:hover { background: rgba(255,0,60,0.2); }

@@ -1,0 +1,259 @@
+.page {
+  padding: 2rem;
+  max-width: 900px;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  gap: 1rem;
+  color: var(--text-secondary);
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255,0,60,0.2);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.backBtn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: inherit;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.backBtn:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+
+/* Profile Card */
+.profileCard {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.avatarLarge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255,0,60,0.15);
+  border: 2px solid rgba(255,0,60,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  flex-shrink: 0;
+}
+
+.profileInfo {
+  flex: 1;
+  min-width: 180px;
+}
+
+.name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.emailText {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid;
+  background: rgba(255,255,255,0.04);
+}
+
+.activeBadge {
+  color: #00c864;
+  border-color: rgba(0,200,100,0.3);
+}
+
+.suspendedBadge {
+  color: #ff5050;
+  border-color: rgba(255,80,80,0.3);
+}
+
+.profileStats {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.profileStat {
+  text-align: center;
+}
+
+.profileStatValue {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.profileStatLabel {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+}
+
+/* Activity Section */
+.activitySection {}
+
+.activityHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.filterTabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filterTab {
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.filterTab:hover { color: #fff; }
+
+.activeTab {
+  background: rgba(255,0,60,0.15);
+  border-color: rgba(255,0,60,0.35);
+  color: var(--accent-color);
+}
+
+.empty {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.timelineItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.timelineItem:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.timelineIcon {
+  font-size: 1.4rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.timelineContent {
+  flex: 1;
+}
+
+.timelineTitle {
+  font-weight: 600;
+  color: #fff;
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+}
+
+.timelineDetails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.detailChip {
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.detailChip strong {
+  color: #fff;
+}
+
+.timelineTime {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.3);
+  white-space: nowrap;
+  padding-top: 0.15rem;
+}

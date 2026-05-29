@@ -16,6 +16,9 @@ export default function Navbar() {
     setIsLoggedIn(loggedIn);
   }, []);
 
+  const router = useRouter();
+  const pathname = usePathname();
+
   const handleLogout = async () => {
     // Attempt to logout both user and admin sessions (ignore errors)
     await fetch('/api/auth/user/logout', { method: 'POST' }).catch(() => {});
@@ -23,7 +26,7 @@ export default function Navbar() {
     setIsLoggedIn(false);
     router.push('/login');
   };
-  const pathname = usePathname();
+
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPath, setMenuPath] = useState(pathname);
@@ -124,7 +127,6 @@ export default function Navbar() {
             ))}
           </div>
           <div className={styles.mobileActions}>
-            <Link href="/attendance" className={styles.mobileAttendance}>Member Check-In</Link>
             {isLoggedIn ? (
               <button onClick={handleLogout} className="btn-primary" style={{ width: "100%" }}>Logout</button>
             ) : (

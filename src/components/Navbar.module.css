@@ -32,6 +32,8 @@
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
+  position: relative;
+  z-index: 1250;
 }
 
 .logo {
@@ -165,6 +167,12 @@
 }
 
 @media (max-width: 900px) {
+  .navbar {
+    padding: 1rem 0;
+  }
+  .navbar.scrolled {
+    padding: 0.5rem 0;
+  }
   .links {
     display: none;
   }
@@ -184,6 +192,8 @@
     border-radius: 12px;
     cursor: pointer;
     margin-left: 1rem;
+    position: relative;
+    z-index: 1300;
   }
   .hamburger {
     display: block;
@@ -237,7 +247,9 @@
     position: relative;
     width: min(100%, 340px);
     height: 100%;
-    background: var(--card-bg);
+    background: rgba(11, 12, 16, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-left: 1px solid var(--card-border);
     padding: 2rem 1.5rem;
     border-radius: 0 0 0 20px;

@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     if (!payload) return NextResponse.json({ error: "Invalid token" }, { status: 401 });
 
     const admins = await getAdmins();
-    const requester = admins.find((a) => a.email === payload.email);
+    const requester = admins.find((a: { email: string; role: string }) => a.email === payload.email);
     if (!requester || requester.role !== "super") {
       return NextResponse.json({ error: "Insufficient permissions" }, { status: 403 });
     }
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid role" }, { status: 400 });
     }
 
-    const target = admins.find((a) => a.email === email);
+    const target = admins.find((a: { email: string; role: string }) => a.email === email);
     if (!target) {
       return NextResponse.json({ error: "Admin not found" }, { status: 404 });
     }

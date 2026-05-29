@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import FloatingCheckIn from "@/components/FloatingCheckIn";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -46,6 +47,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
+        <FloatingCheckIn />
       </body>
     </html>
   );

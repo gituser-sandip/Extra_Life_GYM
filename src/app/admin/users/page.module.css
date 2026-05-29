@@ -1,0 +1,241 @@
+.page {
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.stats {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.statBadge {
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+}
+
+.statBadge.active {
+  background: rgba(0, 200, 100, 0.1);
+  border-color: rgba(0, 200, 100, 0.3);
+  color: #00c864;
+}
+
+.toolbar {
+  margin-bottom: 1.5rem;
+}
+
+.search {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.search:focus {
+  border-color: var(--accent-color);
+}
+
+.search::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+
+.loading, .empty {
+  text-align: center;
+  padding: 4rem;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255,0,60,0.2);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table thead tr {
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.table th {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.table tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.15s;
+}
+
+.table tbody tr:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table td {
+  padding: 0.85rem 1rem;
+  vertical-align: middle;
+}
+
+.saving {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.memberCell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,0,60,0.2);
+  border: 1px solid rgba(255,0,60,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.email {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.date {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.select {
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+}
+
+.select.basic { border-color: rgba(255,255,255,0.2); }
+.select.silver { border-color: rgba(192,192,192,0.5); color: silver; }
+.select.gold { border-color: rgba(255,215,0,0.5); color: gold; }
+.select.platinum { border-color: rgba(100,200,255,0.5); color: #64c8ff; }
+
+.activeSelect {
+  border-color: rgba(0,200,100,0.4);
+  color: #00c864;
+}
+
+.suspendedSelect {
+  border-color: rgba(255,80,80,0.4);
+  color: #ff5050;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.viewBtn {
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.viewBtn:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+.deleteBtn {
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  background: rgba(255, 0, 60, 0.1);
+  border: 1px solid rgba(255, 0, 60, 0.25);
+  color: var(--accent-color);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.deleteBtn:hover {
+  background: rgba(255, 0, 60, 0.2);
+}

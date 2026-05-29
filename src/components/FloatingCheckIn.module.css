@@ -1,0 +1,57 @@
+.fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--neon-red, #ff2a2a);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 50;
+  transition: all 0.3s ease;
+  animation: pulseShadow 2s infinite;
+}
+
+.fab:hover {
+  transform: translateY(-5px);
+  background: #ff4d4d;
+}
+
+@keyframes pulseShadow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 42, 42, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(255, 42, 42, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 42, 42, 0);
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 768px) {
+  .fab {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    padding: 0.75rem;
+  }
+  
+  .label {
+    display: none;
+  }
+}
