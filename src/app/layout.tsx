@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     siteName: "ExtraLife GYM",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop",
+        url: "/hero-bg.jpg",
         width: 1200,
         height: 630,
         alt: "ExtraLife GYM interior"
