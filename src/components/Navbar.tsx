@@ -6,9 +6,11 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuPath, setMenuPath] = useState(pathname);
+  const open = menuOpen && menuPath === pathname;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -16,15 +18,10 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // close mobile menu on route change
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
   // handle ESC to close
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") setMenuOpen(false);
     };
     if (open) document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
@@ -50,7 +47,10 @@ export default function Navbar() {
           className={`${styles.mobileToggle} ${open ? styles.openToggle : ""}`}
           aria-expanded={open}
           aria-controls="mobile-menu"
-          onClick={() => setOpen((s) => !s)}
+          onClick={() => {
+            if (!menuOpen) setMenuPath(pathname);
+            setMenuOpen((s) => !s);
+          }}
           aria-label={open ? "Close menu" : "Open menu"}
         >
           <span className={styles.hamburger} aria-hidden="true"></span>
@@ -95,7 +95,7 @@ export default function Navbar() {
                 href={l.href}
                 className={`${styles.mobileLink} ${isActive(l.href) ? styles.active : ""}`}
                 aria-current={isActive(l.href) ? "page" : undefined}
-                onClick={() => setOpen(false)}
+                onClick={() => setMenuOpen(false)}
               >
                 {l.label}
               </Link>
@@ -106,7 +106,7 @@ export default function Navbar() {
             <Link href="/pricing" className="btn-primary" style={{ width: "100%" }}>Join Now</Link>
           </div>
         </div>
-        <div className={styles.mobileBackdrop} onClick={() => setOpen(false)} aria-hidden="true"></div>
+        <div className={styles.mobileBackdrop} onClick={() => setMenuOpen(false)} aria-hidden="true"></div>
       </div>
     </nav>
   );
