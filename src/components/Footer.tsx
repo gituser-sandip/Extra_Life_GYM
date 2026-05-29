@@ -1,12 +1,20 @@
 import styles from "./Footer.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.grid}`}>
         <div className={styles.brand}>
-          <h2>ExtraLife <span>GYM</span></h2>
+          <div className={styles.brandLogoContainer}>
+            <div className={styles.logoImageWrapper}>
+              <div className={styles.logoImageInner}>
+                <Image src="/logo.jpg" alt="Extra Life GYM Logo" fill style={{ objectFit: 'cover' }} />
+              </div>
+            </div>
+            <h2>ExtraLife <span>GYM</span></h2>
+          </div>
           <p>Unleash your potential in the most premium fitness environment.</p>
         </div>
         <div className={styles.links}>

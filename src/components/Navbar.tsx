@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./Navbar.module.css";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
@@ -40,7 +41,12 @@ export default function Navbar() {
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`} aria-label="Main navigation">
       <div className={`container ${styles.navContainer}`}>
         <Link href="/" className={styles.logo} aria-label="ExtraLife GYM home">
-          ExtraLife <span>GYM</span>
+          <div className={styles.logoImageWrapper}>
+            <div className={styles.logoImageInner}>
+              <Image src="/logo.jpg" alt="Extra Life GYM Logo" fill style={{ objectFit: 'cover' }} />
+            </div>
+          </div>
+          <div className={styles.logoText}>ExtraLife <span>GYM</span></div>
         </Link>
 
         <button
