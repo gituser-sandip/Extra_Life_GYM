@@ -30,8 +30,9 @@ export default function AdminLogin() {
       }
 
       router.push("/admin");
-    } catch (err: any) {
-      setError(err.message);
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Login failed");
     } finally {
       setLoading(false);
     }
@@ -73,7 +74,7 @@ export default function AdminLogin() {
         </form>
 
         <div className={styles.link}>
-          Don't have an account? <Link href="/admin/signup">Sign Up</Link>
+          Don&apos;t have an account? <Link href="/admin/signup">Sign Up</Link>
         </div>
       </div>
     </div>

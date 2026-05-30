@@ -7,23 +7,35 @@ import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // Detect authentication status on client side
-  useEffect(() => {
-    const cookies = document.cookie;
-    const loggedIn = /(?:admin_session|user_session)=/.test(cookies);
-    setIsLoggedIn(loggedIn);
-  }, []);
-
   const router = useRouter();
   const pathname = usePathname();
+  const [sessionType, setSessionType] = useState<"user" | "admin" | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    const timer = window.setTimeout(() => {
+      fetch("/api/auth/session")
+        .then((res) => res.json())
+        .then((data) => {
+          if (active) setSessionType(data.authenticated ? data.type : null);
+        })
+        .catch(() => {
+          if (active) setSessionType(null);
+        });
+    }, 0);
+
+    return () => {
+      active = false;
+      window.clearTimeout(timer);
+    };
+  }, [pathname]);
 
   const handleLogout = async () => {
     // Attempt to logout both user and admin sessions (ignore errors)
     await fetch('/api/auth/user/logout', { method: 'POST' }).catch(() => {});
     await fetch('/api/auth/admin/logout', { method: 'POST' }).catch(() => {});
-    setIsLoggedIn(false);
+    setSessionType(null);
+    router.refresh();
     router.push('/login');
   };
 
@@ -55,6 +67,8 @@ export default function Navbar() {
   ];
 
   const isActive = (href: string) => pathname === href || pathname?.startsWith(href + "/");
+  const accountHref = sessionType === "admin" ? "/admin" : "/dashboard";
+  const accountLabel = sessionType === "admin" ? "Admin Panel" : "Dashboard";
 
   return (
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`} aria-label="Main navigation">
@@ -95,8 +109,11 @@ export default function Navbar() {
         </div>
 
           <div className={styles.actions}>
-            {isLoggedIn ? (
-              <button onClick={handleLogout} className="btn-primary">Logout</button>
+            {sessionType ? (
+              <>
+                <Link href={accountHref} className="btn-secondary">{accountLabel}</Link>
+                <button onClick={handleLogout} className="btn-primary">Logout</button>
+              </>
             ) : (
               <Link href="/login" className="btn-primary" aria-label="Login / Sign Up">
                 Login / Sign Up
@@ -127,8 +144,11 @@ export default function Navbar() {
             ))}
           </div>
           <div className={styles.mobileActions}>
-            {isLoggedIn ? (
-              <button onClick={handleLogout} className="btn-primary" style={{ width: "100%" }}>Logout</button>
+            {sessionType ? (
+              <>
+                <Link href={accountHref} className="btn-secondary" style={{ width: "100%" }} onClick={() => setMenuOpen(false)}>{accountLabel}</Link>
+                <button onClick={handleLogout} className="btn-primary" style={{ width: "100%" }}>Logout</button>
+              </>
             ) : (
               <Link href="/login" className="btn-primary" style={{ width: "100%" }}>Login / Sign Up</Link>
             )}

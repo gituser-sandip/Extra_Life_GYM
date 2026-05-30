@@ -22,12 +22,18 @@ export default async function AdminAttendance() {
             <thead>
               <tr>
                 <th>Member ID</th>
+                <th>Email</th>
+                <th>Source</th>
+                <th>Checked In</th>
               </tr>
             </thead>
             <tbody>
-              {attendances.map((record: any, index: number) => (
-                <tr key={index}>
+              {[...attendances].reverse().map((record, index) => (
+                <tr key={record.id || index}>
                   <td>{record.memberId}</td>
+                  <td>{record.email || "Unknown"}</td>
+                  <td>{record.source || "manual"}</td>
+                  <td>{record.timestamp ? new Date(record.timestamp).toLocaleString() : "Unknown"}</td>
                 </tr>
               ))}
             </tbody>

@@ -1,5 +1,5 @@
 .page {
-  min-height: 100vh;
+  min-height: 100dvh;
   padding: 6rem 2rem 4rem;
   background: var(--bg-color);
 }
@@ -53,6 +53,54 @@
   color: var(--accent-color);
 }
 
+.memberId {
+  overflow-wrap: anywhere;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.meta {
+  margin-top: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.alert {
+  max-width: 1200px;
+  margin: 0 auto 1.5rem;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  background: rgba(255, 0, 60, 0.12);
+  border: 1px solid rgba(255, 0, 60, 0.28);
+  color: #fff;
+}
+
+.statRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.statRow:last-child {
+  border-bottom: 0;
+}
+
+.statRow span {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent-color);
+}
+
+.statRow small {
+  color: var(--text-secondary);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .links {
   display: flex;
   flex-direction: column;
@@ -84,4 +132,26 @@
   margin-left: auto;
   margin-right: auto;
   display: flex;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 6rem 1rem 3rem;
+  }
+  .header h1 {
+    font-size: 1.8rem;
+  }
+  .header p {
+    font-size: 0.95rem;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .statValue {
+    font-size: 2.2rem;
+  }
+  .card {
+    padding: 1.5rem;
+  }
 }

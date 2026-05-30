@@ -1,35 +1,35 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
 import { hashPassword } from "@/lib/password";
-
-const ADMINS_FILE = path.join(process.cwd(), "admins.json");
+import { getAdmins, isValidEmail, normalizeEmail, sanitizeText, writeAdmins } from "@/lib/data";
 
 export async function POST(req: Request) {
   try {
-    const { email, password } = await req.json();
+    const body = await req.json();
+    const email = normalizeEmail(body.email);
+    const password = sanitizeText(body.password, 128);
 
     if (!email || !password) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
-    let admins: any[] = [];
-    try {
-      const raw = await fs.readFile(ADMINS_FILE, "utf8");
-      admins = JSON.parse(raw || "[]");
-    } catch {
-      admins = [];
+    if (!isValidEmail(email)) {
+      return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 });
     }
 
+    if (password.length < 8) {
+      return NextResponse.json({ error: "Password must be at least 8 characters." }, { status: 400 });
+    }
+
+    const admins = await getAdmins();
     const existingUser = admins.find((a) => a.email === email);
     if (existingUser) {
       return NextResponse.json({ error: "User already exists" }, { status: 400 });
     }
 
     const hashed = await hashPassword(password);
-    admins.push({ email, password: hashed, role: "admin" });
+    admins.push({ email, password: hashed, role: admins.length === 0 ? "super" : "admin", createdAt: new Date().toISOString() });
 
-    await fs.writeFile(ADMINS_FILE, JSON.stringify(admins, null, 2), "utf8");
+    await writeAdmins(admins);
 
     return NextResponse.json({ ok: true });
   } catch (e) {

@@ -4,8 +4,14 @@ import pageStyles from "../page.module.css";
 
 export const dynamic = "force-dynamic";
 
+type ContactSubmission = {
+  name?: string;
+  email?: string;
+  message?: string;
+};
+
 export default async function AdminContacts() {
-  const contacts = await getContacts();
+  const contacts = await getContacts() as ContactSubmission[];
 
   return (
     <div>
@@ -27,7 +33,7 @@ export default async function AdminContacts() {
               </tr>
             </thead>
             <tbody>
-              {contacts.map((contact: any, index: number) => (
+              {contacts.map((contact, index) => (
                 <tr key={index}>
                   <td>{contact.name}</td>
                   <td>{contact.email}</td>

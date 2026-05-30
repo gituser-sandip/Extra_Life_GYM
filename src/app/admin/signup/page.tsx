@@ -32,8 +32,8 @@ export default function AdminSignup() {
       // Automatically log them in after signup? 
       // The signup API doesn't return a token, so we just redirect to login.
       router.push("/admin/login");
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Signup failed");
     } finally {
       setLoading(false);
     }

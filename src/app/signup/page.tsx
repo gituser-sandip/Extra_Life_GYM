@@ -22,6 +22,11 @@ export default function SignupPage() {
       return;
     }
 
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters.");
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch("/api/auth/user/signup", {
@@ -34,7 +39,8 @@ export default function SignupPage() {
       if (!res.ok) {
         setError(data.error || "Sign up failed");
       } else {
-        router.push("/login");
+        router.push("/dashboard");
+        router.refresh();
       }
     } catch {
       setError("Something went wrong. Please try again.");

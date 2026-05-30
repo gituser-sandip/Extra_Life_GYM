@@ -1,5 +1,5 @@
 .container {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,4 +93,18 @@
 .link:hover {
   color: var(--accent-color);
   text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+    align-items: flex-start;
+    padding-top: 6rem;
+  }
+  .card {
+    padding: 2rem 1.5rem;
+  }
+  .header h1 {
+    font-size: 1.6rem;
+  }
 }

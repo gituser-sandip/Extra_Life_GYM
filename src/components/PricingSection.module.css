@@ -86,4 +86,17 @@
   .popular:hover {
     transform: scale(1) translateY(-5px);
   }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .card {
+    padding: 2rem 1.5rem;
+  }
+  .price {
+    font-size: 3rem;
+  }
+  .features {
+    margin-bottom: 2rem;
+  }
 }

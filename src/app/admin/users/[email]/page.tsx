@@ -44,7 +44,6 @@ export default function UserDetailPage() {
   const [filterType, setFilterType] = useState("All");
 
   const fetchData = useCallback(async () => {
-    setLoading(true);
     const [usersRes, actRes] = await Promise.all([
       fetch("/api/admin/users-list"),
       fetch(`/api/user/activities?email=${encodeURIComponent(decoded)}`),
@@ -58,7 +57,13 @@ export default function UserDetailPage() {
     setLoading(false);
   }, [decoded]);
 
-  useEffect(() => { fetchData(); }, [fetchData]);
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      fetchData();
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, [fetchData]);
 
   const activityTypes = ["All", ...Array.from(new Set(activities.map((a) => a.type)))];
   const filtered = filterType === "All" ? activities : activities.filter((a) => a.type === filterType);

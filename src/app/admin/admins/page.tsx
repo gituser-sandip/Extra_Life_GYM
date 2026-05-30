@@ -17,7 +17,6 @@ export default function AdminsPage() {
   const [msg, setMsg] = useState<{ text: string; ok: boolean } | null>(null);
 
   const fetchAdmins = useCallback(async () => {
-    setLoading(true);
     const res = await fetch("/api/admin/admins-list");
     const data = await res.json();
     setAdmins(data.admins || []);
@@ -25,7 +24,13 @@ export default function AdminsPage() {
     setLoading(false);
   }, []);
 
-  useEffect(() => { fetchAdmins(); }, [fetchAdmins]);
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      fetchAdmins();
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, [fetchAdmins]);
 
   const changeRole = async (email: string, role: string) => {
     setSaving(email);

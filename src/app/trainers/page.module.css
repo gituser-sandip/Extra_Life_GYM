@@ -57,3 +57,20 @@
   line-height: 1.6;
   font-size: 0.95rem;
 }
+
+@media (max-width: 768px) {
+  .trainersGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .trainerCard {
+    padding: 2rem 1.5rem;
+  }
+  .imageWrapper {
+    width: 110px;
+    height: 110px;
+  }
+  .trainerName {
+    font-size: 1.4rem;
+  }
+}

@@ -1,31 +1,27 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
 import { comparePassword } from "@/lib/password";
 import { signToken } from "@/lib/jwt";
 import { cookies } from "next/headers";
-
-const USERS_FILE = path.join(process.cwd(), "users.json");
+import { getUsers, normalizeEmail, sanitizeText } from "@/lib/data";
 
 export async function POST(req: Request) {
   try {
-    const { email, password } = await req.json();
+    const body = await req.json();
+    const email = normalizeEmail(body.email);
+    const password = sanitizeText(body.password, 128);
 
     if (!email || !password) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
-    let users: any[] = [];
-    try {
-      const raw = await fs.readFile(USERS_FILE, "utf8");
-      users = JSON.parse(raw || "[]");
-    } catch {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
-    }
-
+    const users = await getUsers();
     const user = users.find((u) => u.email === email);
     if (!user) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+    }
+
+    if (user.status !== "Active") {
+      return NextResponse.json({ error: "This account is suspended." }, { status: 403 });
     }
 
     const isMatch = await comparePassword(password, user.password);

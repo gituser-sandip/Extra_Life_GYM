@@ -2,6 +2,7 @@
 
 .header {
   margin-bottom: 1.5rem;
+  margin-top: 160px;
 }
 
 .title {
@@ -188,3 +189,34 @@
 }
 
 .demoteBtn:hover { background: rgba(255,0,60,0.2); }
+
+@media (max-width: 768px) {
+  .page {
+    padding: 1rem;
+  }
+  .title {
+    font-size: 1.4rem;
+  }
+  .table th,
+  .table td {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  .memberCell {
+    gap: 0.5rem;
+  }
+  .avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 0.75rem;
+  }
+  .roleActions {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .promoteBtn,
+  .demoteBtn {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.78rem;
+  }
+}

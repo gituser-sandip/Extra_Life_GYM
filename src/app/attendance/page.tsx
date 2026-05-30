@@ -5,13 +5,15 @@ import styles from "./page.module.css";
 import { useState } from "react";
 import { Scanner } from "@yudiel/react-qr-scanner";
 
+type ScanResult = Array<{ rawValue: string }>;
+
 export default function AttendancePage() {
   const [memberId, setMemberId] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
   const [isScanning, setIsScanning] = useState(false);
 
-  const processCheckIn = async (id: string) => {
+  const processCheckIn = async (id: string, source: "manual" | "qr" = "manual") => {
     if (!id.trim()) {
       setStatus("error");
       setMessage("Please enter your member ID.");
@@ -23,18 +25,19 @@ export default function AttendancePage() {
       const res = await fetch("/api/attendance", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ memberId: id }),
+        body: JSON.stringify({ memberId: id, source }),
       });
+      const data = await res.json();
       if (!res.ok) {
-        throw new Error("Check-in failed");
+        throw new Error(data.error || "Check-in failed");
       }
       setStatus("success");
-      setMessage("Check-in successful! Have a great workout.");
+      setMessage(`Check-in successful for ${data.memberId}. Have a great workout.`);
       setMemberId("");
       setIsScanning(false);
-    } catch {
+    } catch (err) {
       setStatus("error");
-      setMessage("Unable to process check-in. Please try again.");
+      setMessage(err instanceof Error ? err.message : "Unable to process check-in. Please try again.");
     }
     setTimeout(() => setStatus("idle"), 3000);
   };
@@ -44,11 +47,11 @@ export default function AttendancePage() {
     await processCheckIn(memberId);
   };
 
-  const handleScan = (result: any) => {
+  const handleScan = (result: ScanResult) => {
     if (result && result.length > 0) {
       const scannedId = result[0].rawValue;
       setMemberId(scannedId);
-      processCheckIn(scannedId);
+      processCheckIn(scannedId, "qr");
     }
   };
 

@@ -1,28 +1,20 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
 import { comparePassword } from "@/lib/password";
 import { signToken } from "@/lib/jwt";
 import { cookies } from "next/headers";
-
-const ADMINS_FILE = path.join(process.cwd(), "admins.json");
+import { getAdmins, normalizeEmail, sanitizeText } from "@/lib/data";
 
 export async function POST(req: Request) {
   try {
-    const { email, password } = await req.json();
+    const body = await req.json();
+    const email = normalizeEmail(body.email);
+    const password = sanitizeText(body.password, 128);
 
     if (!email || !password) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
-    let admins: any[] = [];
-    try {
-      const raw = await fs.readFile(ADMINS_FILE, "utf8");
-      admins = JSON.parse(raw || "[]");
-    } catch {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
-    }
-
+    const admins = await getAdmins();
     const admin = admins.find((a) => a.email === email);
     if (!admin) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });

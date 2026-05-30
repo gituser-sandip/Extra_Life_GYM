@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
+import { isValidEmail, normalizeEmail, sanitizeText } from "@/lib/data";
 
 type ContactPayload = {
   name: string;
@@ -33,15 +34,15 @@ async function saveSubmission(payload: ContactPayload) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, message } = body as ContactPayload;
+    const name = sanitizeText(body.name, 100);
+    const email = normalizeEmail(body.email);
+    const message = sanitizeText(body.message, 2000);
 
     if (!name || !email || !message) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
-    // basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!isValidEmail(email)) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
