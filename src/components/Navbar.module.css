@@ -168,10 +168,14 @@
 
 @media (max-width: 900px) {
   .navbar {
-    padding: 1rem 0;
+    padding: calc(0.85rem + env(safe-area-inset-top, 0px)) 0 0.85rem;
+    background: #0b0c10;
+    border-bottom: 1px solid rgba(255, 0, 60, 0.16);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   }
   .navbar.scrolled {
-    padding: 0.5rem 0;
+    padding: calc(0.7rem + env(safe-area-inset-top, 0px)) 0 0.7rem;
+    background: #0b0c10;
   }
   .links {
     display: none;
@@ -229,16 +233,20 @@
   .mobileMenu {
     position: fixed;
     inset: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     justify-content: flex-end;
     pointer-events: none;
-    z-index: 1100;
+    z-index: 1200;
     visibility: hidden;
+    background: transparent;
+    isolation: isolate;
   }
   .mobileMenu .mobileBackdrop {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.9);
+    background: #0b0c10;
     opacity: 0;
     transition: opacity 0.25s ease, visibility 0.25s ease;
     pointer-events: none;
@@ -246,31 +254,36 @@
   .mobileMenu .mobileContent {
     position: relative;
     width: 100%;
-    height: 100%;
-    background: rgba(11, 12, 16, 0.98);
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: #0b0c10;
     border: none;
-    padding: 7rem 2rem 2rem;
+    padding: calc(7rem + env(safe-area-inset-top, 0px)) 2rem calc(2rem + env(safe-area-inset-bottom, 0px));
     border-radius: 0;
     transform: translateY(-20px);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
     pointer-events: none;
-    z-index: 1200;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
   }
-  .mobileMenu.open { pointer-events: auto; visibility: visible; }
+  .mobileMenu.open { pointer-events: auto; visibility: visible; background: #0b0c10; }
   .mobileMenu.open .mobileBackdrop { opacity: 1; pointer-events: auto; visibility: visible; }
   .mobileMenu.open .mobileContent { opacity: 1; transform: translateY(0); pointer-events: auto; visibility: visible; }
 
-  .mobileLinks { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 3rem; width: 100%; align-items: center; }
-  .mobileLink { padding: 0.5rem; font-size: 1.5rem; color: var(--text-secondary); font-weight: 600; }
+  .mobileLinks { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 3rem; width: 100%; align-items: center; }
+  .mobileLink { padding: 0.45rem; font-size: 1.35rem; color: var(--text-secondary); font-weight: 700; }
   .mobileLink:hover, .mobileLink.active { color: var(--accent-color); }
   .mobileActions { display: flex; flex-direction: column; gap: 1rem; width: 100%; max-width: 300px; margin: 0 auto; }
+  .mobileActions a,
+  .mobileActions button {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
   .mobileAttendance { color: var(--text-secondary); font-weight: 700; width: 100%; text-align: center; }
 }
 
